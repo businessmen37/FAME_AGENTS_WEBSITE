@@ -48,6 +48,9 @@ function createBrief(data) {
   return copy.briefTitle + '\n\n' + head.join('\n') + '\n\n' + copy.need + ':\n' + (data.getAll('services').join('\n') || '—') + '\n\n' + copy.message + ':\n' + data.get('message') + '\n\n' + copy.budget + ': ' + data.get('budget') + '\n' + copy.timing + ': ' + (data.get('timing') || '—');
 }
 let brief = '';
+if(form) {
+const service = new URLSearchParams(location.search).get('service');
+if (/^[0-2]$/.test(service || '')) document.querySelector('#choice-' + service).checked = true;
 form.addEventListener('submit', event => {
   event.preventDefault();
   if (!form.reportValidity()) return;
@@ -66,3 +69,4 @@ document.querySelector('#download-brief').addEventListener('click', () => {
   const a = document.createElement('a'); a.href = address; a.download = 'fame-agents-project-brief.txt'; a.click();
   setTimeout(() => URL.revokeObjectURL(address), 1000);
 });
+}
