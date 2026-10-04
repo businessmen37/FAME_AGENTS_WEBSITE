@@ -33,7 +33,9 @@ for lang in langs:
     path=ROOT/'index.html' if lang=='en' else ROOT/lang/'index.html'
     page=Page(); page.feed(path.read_text())
     assert page.lang==lang
-    assert page.cards==8 and len(page.fields)==8
+    assert page.cards==3 and len(page.fields)==3
+    assert any(x.startswith('https://wa.me/391497073725') for x in page.links)
+    assert '€' not in path.read_text() and '$' not in path.read_text()
     assert len(page.alt)==7 and len(page.canonical)==1
     assert len(page.json)==2 and page.json[0]['@type']=='Organization'
     for href in page.links:
@@ -48,7 +50,7 @@ for lang in langs:
                 other=Page(); other.feed(target.read_text())
             assert parsed.fragment in other.ids,('missing anchor',href)
     assert any(m.get('property')=='og:image' and m['content'].endswith('.png') for m in page.meta)
-    print(lang+': 8 services, translated UI, valid language links and anchors, structured data')
+    print(lang+': 3 core services, WhatsApp, no prices, translated UI, valid links and metadata')
 assert (ROOT/'assets/hero.webp').exists()
 assert (ROOT/'assets/social-card.png').exists()
 ET.parse(ROOT/'sitemap.xml')

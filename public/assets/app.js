@@ -54,6 +54,7 @@ form.addEventListener('submit', event => {
   brief = createBrief(new FormData(form));
   document.querySelector('#brief-preview').textContent = brief;
   document.querySelector('#email-brief').href = 'mailto:info@fameagents.de?subject=' + encodeURIComponent(copy.emailSubject) + '&body=' + encodeURIComponent(brief);
+  document.querySelector('#whatsapp-brief').href = 'https://wa.me/391497073725?text=' + encodeURIComponent(brief);
   if (typeof dialog.showModal === 'function') dialog.showModal();
   else { dialog.setAttribute('open',''); dialog.scrollIntoView({behavior:'smooth'}); }
 });

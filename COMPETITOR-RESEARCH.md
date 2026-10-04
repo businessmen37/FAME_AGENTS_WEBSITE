@@ -1,5 +1,7 @@
 # Fame Agents: competitor benchmarks and website strategy
 
+Revision note: The current website now leads with three approved core services: website design and redesign, short video editing, and social media content and management. It has no public prices and includes WhatsApp contact. The discussion of the first build below documents the earlier eight-service version, not the current homepage.
+
 Research date: October 4, 2026. These are five relevant benchmark agencies selected for overlap with Fame Agents’ services, European relevance or useful global positioning. This is not a verified ranking of the five largest or most visited agencies. DEPT, Serviceplan and Monks are much larger organizations; Qosmos is a closer service-model comparison. Observations are based on each agency’s own public website and describe presentation, not independently proven commercial performance.
 
 | Benchmark | Relevant overlap | What its website does well | Fame Agents’ opportunity |

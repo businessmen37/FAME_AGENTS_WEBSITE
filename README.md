@@ -1,6 +1,6 @@
 # Fame Agents website
 
-A complete static website with English, Spanish, Portuguese, French, German and Italian pages. The website is built and included in `public/`. No npm installation, framework, database or build service is needed to serve it.
+A complete static website with English, Spanish, Portuguese, French, German and Italian pages. This revision focuses on website design and redesign, short video editing, and social media content and management. It displays no prices. The website is built and included in `public/`. No npm installation, framework, database or build service is needed to serve it.
 
 ## Preview
 
@@ -9,8 +9,9 @@ Run `python3 -m http.server 8080 --directory public` from this folder, then visi
 ## What is included
 
 - Six fully rendered languages with distinct URLs, page titles, descriptions, canonical URLs and hreflang links.
-- All eight service groups and every supplied deliverable, translated into each language.
-- Service selection connected to a project brief; email preview and text-file download.
+- Three core service groups with translated deliverables in every language.
+- Service selection connected to a project brief; email preview, WhatsApp brief link and text-file download.
+- Direct WhatsApp buttons for the confirmed business number +39 149 707 3725.
 - Original abstract brand artwork, vector service icons and a provisional typographic wordmark.
 - Mobile navigation, reduced-motion support, labelled fields, keyboard focus styling and a skip link.
 - Direct email, all three supplied phone numbers, and all six social channels.
@@ -19,7 +20,7 @@ Run `python3 -m http.server 8080 --directory public` from this folder, then visi
 
 ## Edit and rebuild
 
-Edit the `COPY` and `SERVICES` dictionaries in `build.py`, then run `python3 build.py`. Styling and interaction logic are in `public/assets/style.css` and `public/assets/app.js`. These assets are shared by all languages. The prebuilt output is included so rebuilding is optional.
+Edit the current service descriptions and positioning in `focus.py`. Shared interface labels are in `build.py`. Run `python3 build.py`, then `python3 check.py`. Styling and interaction logic are in `public/assets/style.css` and `public/assets/app.js`. These assets are shared by all languages. The prebuilt output is included so rebuilding is optional.
 
 English is `/`, Spanish `/es/`, Portuguese `/pt/`, French `/fr/`, German `/de/`, Italian `/it/`. Portuguese uses Brazilian Portuguese. Language links are always visible through the header selector; the server does not automatically redirect visitors by location.
 
@@ -41,13 +42,13 @@ Source: https://developers.cloudflare.com/pages/platform/limits/
 
 ## Costs
 
-This build has no paid themes, subscriptions or dependencies. GitHub source control and Cloudflare Pages can use their free tiers within current limits. Domain renewals and the existing email account remain separate costs. Advertising, printing, shipping, physical production, travel and optional third-party software are project costs, agreed separately. Budget options in the form are visitor preferences, not published package prices or quotes. No payment processing is implemented.
+This build has no paid themes, subscriptions or dependencies. GitHub source control and Cloudflare Pages can use their free tiers within current limits. Domain renewals and the existing email account remain separate costs. Optional third-party software and advertising are agreed separately. The public pages have no prices or numerical budget ranges. The form asks whether visitors have a budget in mind or need advice. No payment processing is implemented.
 
 ## Before public launch
 
 - Replace `public/legal.html`, currently an explicitly marked English pre-launch draft, with the company’s complete legal notice and privacy policy, translated into all six languages. Supply legal entity, business address, representative and relevant registration/VAT information. Confirm the final policy reflects actual hosting and email handling. The draft is excluded from search indexing.
 - Supply permission-cleared portfolio images and real project details: goal, work delivered and verified results. The current site directs visitors to supplied social channels; it does not invent clients, reviews or case studies.
-- Confirm the phone numbers, especially `+39 149 707 3725`, which is preserved exactly as supplied. Test actual calls.
+- The owner confirmed WhatsApp on `+39 149 707 3725`. Its link is `https://wa.me/391497073725`. Check calls on all supplied phone numbers and verify the WhatsApp conversation opens on your phone before public launch.
 - Approve the proposed typographic wordmark. Your supplied original is preserved as `public/assets/original-logo.png`. The build does not use a registered trademark symbol because registration was not independently confirmed.
 - Review translations with native speakers before public release. All main website and interaction copy is translated; the legal draft and 404 page are English.
 - Verify real Facebook history and obtain permission to quote any reviews. The claimed July 4, 2018 creation date could not be independently verified during this research.
@@ -55,7 +56,11 @@ This build has no paid themes, subscriptions or dependencies. GitHub source cont
 
 ## Contact brief behavior
 
-The form does not automatically send anything. It previews a brief, then offers a `mailto:` link and downloadable UTF-8 text file. Visitors send the email themselves. The form does not save contact details to cookies or browser storage. Mail links can be limited by device/email-client configuration or long message length, which is why a download fallback is included. A server-backed form can be added later if desired.
+The form does not automatically send anything. It previews a brief, then offers an email link, a WhatsApp link containing the brief, and a downloadable UTF-8 text file. Visitors choose the channel and send the message themselves. Selecting the WhatsApp brief link passes the prepared text to WhatsApp, a third-party service. The form does not save contact details to cookies or browser storage. Email and WhatsApp links can be limited by device configuration or long message length, which is why a download fallback is included. A server-backed form can be added later if desired.
+
+## Verification for this revision
+
+All six pages passed checks for three service cards, three service selections, local links, section anchors, language links, structured data, WhatsApp destination and absence of public currency symbols. JavaScript syntax passed. The browser preview could not reach the local server, returning `ERR_BLOCKED_BY_CLIENT`, so desktop/mobile visual checks and real-browser enquiry tests remain to be performed. No email or WhatsApp message was sent during verification.
 
 ## Artwork
 

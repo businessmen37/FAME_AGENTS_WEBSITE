@@ -99,11 +99,16 @@ COPY = {
 'contacttag':'04 / CREIAMO QUALCOSA INSIEME','contacttitle':'TU HAI\nL’IDEA.','contactsub':'Diamole vita.','contacttext':'Raccontaci cosa hai in mente. Scegli i servizi e prepara un’e-mail per il tuo progetto.','name':'Il tuo nome','email':'La tua e-mail','company':'Azienda / progetto','need':'Di cosa hai bisogno?','message':'La tua idea','placeholder':'Cosa vuoi creare, per chi e per quando?','budget':'Fascia di budget','budgetoptions':['Parliamone','Meno di 1.000 €','1.000–3.000 €','3.000–10.000 €','Oltre 10.000 €'],'timing':'Data / tempistiche desiderate','timingplaceholder':'Per esempio, primavera 2027 o flessibile','prepare':'Anteprima dell’e-mail del progetto','privacyhint':'Questo modulo prepara un’e-mail sul tuo dispositivo. Nulla viene inviato finché non la invii dalla tua applicazione e-mail.','preview':'L’e-mail del tuo progetto','openmail':'Apri applicazione e-mail','download':'Scarica il brief','close':'Chiudi','fallback':'Se l’applicazione non si apre, scarica il brief e invialo a info@fameagents.de.','direct':'Preferisci parlare direttamente?','us':'Stati Uniti','italy':'Italia / UE','germany':'Germania / UE','footer':'Creare. Progettare. Promuovere. Gestire. Connettere.','legal':'Informazioni legali e privacy','skip':'Vai al contenuto','menu':'Menu','language':'Lingua','art':'Visual originale del brand','emailSubject':'Richiesta per un nuovo progetto','briefTitle':'Brief di progetto per Fame Agents','status':'Il servizio selezionato è stato aggiunto al brief del progetto.','noscript':'Per una richiesta di progetto, scrivi direttamente a info@fameagents.de.'}
 }
 
+from focus import apply_focus
+apply_focus(COPY, SERVICES)
+for language, delivery in {'en':'We prepare the agreed assets, launch your website, or start your content schedule.', 'es':'Preparamos los materiales, lanzamos tu sitio o iniciamos el calendario de contenido.', 'pt':'Preparamos os materiais, lançamos seu site ou iniciamos o calendário de conteúdo.', 'fr':'Nous préparons les éléments, lançons votre site ou démarrons votre calendrier de contenu.', 'de':'Wir bereiten die Inhalte vor, starten deine Website oder beginnen deinen Content-Plan.', 'it':'Prepariamo i materiali, lanciamo il tuo sito o avviamo il calendario dei contenuti.'}.items():
+    COPY[language]['steps'][-1][1] = delivery
+
 def text(s): return esc(s).replace('\n','<br>')
 def url(lang): return '/' if lang == 'en' else f'/{lang}/'
 def icon(i):
     paths = ['M5 19l3-7L18 2l4 4-10 10-7 3zm3-7 4 4M16 4l4 4','M2 5h20v14H2zM2 9h20M7 7h.01M5 22h14M12 19v3','M12 2l10 5v10l-10 5-10-5V7l10-5zm0 10 10-5M12 12v10M2 7l10 5','M3 13V8l15-5v15L3 13zm0 0 3 8h4l-3-7M21 7v7','M3 6h13v13H3zM16 10l6-3v11l-6-3M8 3h3','M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM3 23v-3a9 9 0 0 1 18 0v3','M3 5h18v16H3zM3 10h18M7 2v6M17 2v6M8 16l3 3 5-5','M6 8V2h12v6M6 17H2V8h20v9h-4M6 14h12v8H6zM18 11h.01']
-    return f'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="{paths[i]}"/></svg>'
+    return f'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="{paths[[1,4,3][i]]}"/></svg>'
 
 for lang, language_name in LANGS:
     c = COPY[lang]; sv = SERVICES[lang]
@@ -138,7 +143,13 @@ for lang, language_name in LANGS:
 </body></html>'''
     dest = PUBLIC if lang == 'en' else PUBLIC/lang
     dest.mkdir(parents=True,exist_ok=True)
-    (dest/'index.html').write_text(html.replace('assets/social-card.svg','assets/social-card.png'))
+    html = html.replace('assets/social-card.svg','assets/social-card.png')
+    html = html.replace('<details><summary>', '<details open><summary>', 3)
+    wa = f'<a class="button whatsapp-link" href="https://wa.me/391497073725" target="_blank" rel="noopener noreferrer">{esc(c["whatsapp"])} <span aria-hidden="true">↗</span></a>'
+    html = html.replace('<p class="direct">', wa+'<p class="direct">')
+    html = html.replace('<button type="button" id="download-brief"', f'<a id="whatsapp-brief" class="secondary" href="https://wa.me/391497073725" target="_blank" rel="noopener noreferrer">{esc(c["share"])}</a><button type="button" id="download-brief"')
+    html = html.replace('<div id="status"', f'<a class="whatsapp-float" href="https://wa.me/391497073725" target="_blank" rel="noopener noreferrer" aria-label="{esc(c["whatsapp"])}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 0 1-8 8H7l-5 3 2-6a8 8 0 1 1 16-5Z"/><path d="M8 7c0 4 2 6 6 7l2-2-3-2-1 1-2-2 1-1-2-2-1 1Z"/></svg><span>WhatsApp</span></a><div id="status"')
+    (dest/'index.html').write_text(html)
 
 (PUBLIC/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+''.join(f'<url><loc>https://fameagents.de{url(k)}</loc></url>' for k,v in LANGS)+'</urlset>')
 (PUBLIC/'robots.txt').write_text('User-agent: *\nAllow: /\nDisallow: /legal.html\nSitemap: https://fameagents.de/sitemap.xml\n')
