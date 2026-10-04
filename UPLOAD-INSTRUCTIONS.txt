@@ -1,0 +1,37 @@
+FAME AGENTS: GITHUB UPLOAD
+
+1. Extract this ZIP on your computer.
+2. Open your GitHub repository and choose Add file > Upload files.
+3. Upload the extracted files and folders directly into the repository root.
+   Upload index.html, assets/, es/, pt/, fr/, de/, it/, and the other files.
+   Do not upload the ZIP itself or place everything inside another folder.
+4. Commit the changes.
+
+The site has six languages, three core services, no public prices, and
+WhatsApp enquiries on +39 149 707 3725.
+
+HOSTING
+GitHub stores the files. For the recommended Cloudflare Pages setup:
+- Connect your GitHub repository.
+- Framework preset: None.
+- No build command.
+- Serve the repository root, where index.html is located.
+- If your existing project uses public/ as its output directory, change it
+  to the repository root for this package.
+- Add fameagents.de through the hosting dashboard. Preserve your existing
+  email DNS records.
+
+UPDATING AN EXISTING REPOSITORY
+Replace existing files with matching names. Keep unrelated files.
+Check your connected host's output directory before deploying.
+
+BEFORE PUBLIC LAUNCH
+The legal.html page is clearly marked as a pre-launch draft and needs your
+legal business details. Real portfolio examples and verified reviews are
+still to be added. Browser visual and enquiry-flow checks remain necessary.
+No prices, payment processing or automatic message sending are included.
+
+PREVIEW
+Open index.html after extracting the ZIP. For a full local preview, run:
+python3 -m http.server 8080
+Then visit http://localhost:8080.
