@@ -16,3 +16,8 @@ body{background:#fff;color:#171717}.site-header{background:#fffffff5;color:#1717
 .language-card:hover{transform:translateY(-3px);border-color:#171717}.language-card>span:last-child{margin-left:auto}.language-flag{font-size:32px;line-height:1.2}
 @media(max-width:760px){.language-welcome{grid-template-columns:1fr;gap:24px}.language-card{padding:16px;gap:10px}}
 @media(prefers-reduced-motion:reduce){.language-card{transition:none}}
+/* Homepage language service showcase */
+.language-welcome{grid-template-columns:1fr;background:radial-gradient(ellipse at 100% 0,#562d22 0,transparent 60%),#171717;color:#fff;text-align:center;gap:36px;padding-top:64px;padding-bottom:64px}
+.language-welcome>div:first-child{margin:auto}.language-welcome h2{max-width:850px;font-size:clamp(36px,4.5vw,64px);margin-bottom:14px}.language-welcome p{margin-left:auto;margin-right:auto;color:#ddd}.language-welcome .eyebrow{color:#ff936f}
+.language-card-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;max-width:1120px;margin:auto;width:100%}.language-card{flex:0 1 220px;min-height:128px;display:grid;grid-template-columns:1fr auto;text-align:left;padding:20px;background:#ffffff0a;border-color:#ffffff26;color:#fff;border-radius:16px}.language-card .language-flag{grid-column:1/-1;display:block;margin-bottom:8px}.language-flag img{display:block;width:54px;height:36px;object-fit:cover;border-radius:4px;box-shadow:0 2px 8px #0004}.language-card:hover{border-color:#ff936f;background:#ffffff14;transform:translateY(-4px)}
+@media(max-width:760px){.language-card{flex-basis:calc(50% - 8px);min-width:0;padding:16px}.language-welcome{gap:28px}}
