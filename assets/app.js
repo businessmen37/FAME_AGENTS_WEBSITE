@@ -49,11 +49,50 @@ function createBrief(data) {
 }
 let brief = '';
 if(form) {
+const deliveryNode = document.querySelector('#contact-delivery');
+const delivery = deliveryNode ? JSON.parse(deliveryNode.textContent) : {enabled:false};
+const sendStatus = document.querySelector('#send-status');
+if (delivery.enabled) {
+  form.querySelector('[type="submit"]').replaceChildren(document.createTextNode(copy.send));
+  document.querySelector('#form-note').textContent = copy.formNote;
+}
 const service = new URLSearchParams(location.search).get('service');
 if (/^[0-2]$/.test(service || '')) document.querySelector('#choice-' + service).checked = true;
-form.addEventListener('submit', event => {
+form.addEventListener('submit', async event => {
   event.preventDefault();
   if (!form.reportValidity()) return;
+  if (delivery.enabled) {
+    const submit = form.querySelector('[type="submit"]');
+    const data = new FormData(form);
+    if (data.get('_honey')) return;
+    const payload = Object.fromEntries(data.entries());
+    payload.services = data.getAll('services').join(', ');
+    payload._subject = copy.emailSubject;
+    payload._template = 'table';
+    submit.disabled = true;
+    submit.textContent = copy.sending;
+    sendStatus.textContent = copy.sending;
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 15000);
+    try {
+      const response = await fetch(delivery.endpoint, {
+        method:'POST', headers:{'Content-Type':'application/json',Accept:'application/json'},
+        body:JSON.stringify(payload), signal:controller.signal
+      });
+      const result = await response.json();
+      if (!response.ok || ![true,'true'].includes(result.success)) throw new Error('Submission not accepted');
+      sendStatus.textContent = copy.sent;
+      form.reset();
+    } catch {
+      sendStatus.textContent = copy.failed;
+    } finally {
+      clearTimeout(timer);
+      submit.disabled = false;
+      submit.textContent = copy.send;
+      sendStatus.focus();
+    }
+    return;
+  }
   brief = createBrief(new FormData(form));
   document.querySelector('#brief-preview').textContent = brief;
   document.querySelector('#email-brief').href = 'mailto:info@fameagents.de?subject=' + encodeURIComponent(copy.emailSubject) + '&body=' + encodeURIComponent(brief);
